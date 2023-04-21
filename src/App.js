@@ -7,7 +7,8 @@ function App() {
     bookname: "",
     description: "",
     isFiction: true,
-    rating: ""
+    rating: "",
+    favCar:""
   })
 
   console.log(formData);
@@ -29,11 +30,17 @@ function App() {
     })
  }
 
+ function submitHandler(event) {
+  event.preventDefault();
+  console.log("on submitting ");
+  console.log(formData)
+ }
+
 
   return (
     <div className="App">
 
-      <form className="form">
+      <form className="form" onSubmit={submitHandler}>
          
          <input  type="text" 
          name="bookname" 
@@ -51,14 +58,15 @@ function App() {
          placeholder="Description" 
          name="description" onChange={changeHandler} value={formData.description} />
 
-         <h3>Rating</h3>
+         <fieldset>
+         <legend>Mode:</legend>
          <input 
          type="radio" 
          onChange={changeHandler}
          name="rating"
          id="nice"
          value="nice"
-         checked={formData.mode === "nice" }
+         checked={formData.rating === "nice" }
          />
          <label htmlFor="nice">Nice</label>
 
@@ -68,9 +76,27 @@ function App() {
          name="rating"
          id="ordinary"
          value="ordinary"
-         checked={formData.mode === "ordinary" }
+         checked={formData.rating === "ordinary" }
          />
          <label htmlFor="ordinary">Ordinary</label>
+         </fieldset>
+
+         <label htmlFor="favCar">Select Your Favaourite Car</label>
+         <select
+         onChange={changeHandler}
+         name="favCar"
+         id="favCar"
+         value={formData.favCar}
+         >
+          <option value="scorpio">Scorpio</option>
+          <option value="xylo">Xylo</option>
+          <option value="defender">Defender</option>
+         </select>
+
+
+         <button>Submit</button>
+         
+
       </form>
       
     </div>
